@@ -34,10 +34,8 @@ def upgrade() -> None:
     sa.Column('status',sa.Enum("active","unactive",nullable=False)),
     sa.Column('created_at',sa.Datetime()),
     sa.Column('updated_at',sa.Datetime()),
-
     )
 
 
 def downgrade() -> None:
-    """Downgrade schema."""
-    pass
+    op.drop_table('sender_account')

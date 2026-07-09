@@ -53,9 +53,8 @@ def upgrade() -> None:
             sa.DateTime(),
             nullable=False,
         )
-)
+    )
 
 
 def downgrade() -> None:
-    """Downgrade schema."""
-    pass
+    op.drop_table('campaigns')
