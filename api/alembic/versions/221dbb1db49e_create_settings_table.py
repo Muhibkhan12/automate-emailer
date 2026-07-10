@@ -19,8 +19,18 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    """Upgrade schema."""
-    pass
+    op.create_table(
+        'settings',
+        sa.Column('id',sa.Integer(),nullable=False),
+        sa.Column('company_name',sa.String(),nullable=False),
+        sa.Column('timezone',sa.Datetime(),nullable=False),
+        sa.Column('default_sender_account',sa.Integer(),sa.Foreignkey(
+            'sender_accounts.id',
+            ondelete='CASCADE',
+        )),
+        sa.Column('created_at',sa.Datetime(),nullable=True),
+        sa.Column('updated_at',sa.Datetime(),nullable=True),
+    )
 
 
 def downgrade() -> None:
