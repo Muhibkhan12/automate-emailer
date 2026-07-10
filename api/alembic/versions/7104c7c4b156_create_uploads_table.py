@@ -19,8 +19,18 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    """Upgrade schema."""
-    pass
+    op.create_table('uploads',
+        sa.Column('id',sa.Integer(),nullable=False),
+        sa.Column('campaign_id',sa.Integer(),sa.Foreignkey(
+            'campaigns.id',
+            ondelete='CASCADE',
+        )),
+        sa.Column('filename',sa.String(),nullable=False),
+        sa.Column('file_path',sa.String(),nullable=False),
+        sa.Column('total_rows',sa.Integer(),nullable=False),
+        sa.Column('imported_rows',sa.Integer(),nullable=False),
+        sa.Column('created_at',sa.Datetime(),nullable=True)
+    )
 
 
 def downgrade() -> None:
