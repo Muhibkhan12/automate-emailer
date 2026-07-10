@@ -36,5 +36,4 @@ def upgrade() -> None:
     )
 
 def downgrade() -> None:
-    """Downgrade schema."""
-    pass
+    op.create_table('email_logs')
