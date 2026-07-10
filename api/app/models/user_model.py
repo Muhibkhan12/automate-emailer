@@ -6,4 +6,4 @@ class User(BaseModel):
     password: str
     email_verified: bool
     verified_token: str
-    time_stamp: time_stamp
+    
