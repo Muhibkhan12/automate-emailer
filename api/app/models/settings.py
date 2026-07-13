@@ -1,4 +1,4 @@
-from sqlalchemy import Table,Column,Integer,String,Boolean,DateTime,Text
+from sqlalchemy import Base, Table,Column,Integer,String,Boolean,DateTime,Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime,UTC
 from cors.db import meta,engine
