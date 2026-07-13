@@ -19,7 +19,7 @@ class EmailLogs(Base):
     created_at : Mapped[datetime] = mapped_column(DateTime(timezone=True),nullable=False,default=lambda: datetime.now(UTC))
     updated_at : Mapped[datetime] = mapped_column(DateTime(timezone=True),nullable=False, default=lambda: datetime.now(UTC),onupdate=lambda: datetime.now(UTC))
 
-    campaign_recipients : Mapped["CampaignsRecipitent"] = relationship(
+    campaign_recipients : Mapped["CampaignsRecipitents"] = relationship(
         back_populates="email_logs"
     )
     sender_account : Mapped["SenderAccount"] = relationship(
