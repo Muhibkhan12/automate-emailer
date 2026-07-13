@@ -25,9 +25,9 @@ def upgrade() -> None:
         sa.Column('name',sa.String(255),nullable=True),
         sa.Column('email',sa.String(255),unique=True),
         sa.Column('password',sa.String(255),nullable=False),
-        sa.Column('email_verification',sa.Boolean(),nullable=False,server_default=0),
+        sa.Column('email_verification',sa.Boolean(),nullable=False,server_default="0"),
         sa.Column('verification_token',sa.String(255),nullable=True),
-        sa.Column('jwt_token',sa.text(),nullable=True),
+        sa.Column('jwt_token',sa.String(500),nullable=True),
         sa.Column('created_at',sa.DateTime(),nullable=False),
         sa.Column('updated_at',sa.DateTime(),nullable=False),
         )

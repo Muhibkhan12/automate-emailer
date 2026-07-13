@@ -20,19 +20,15 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     op.create_table('templates',
-        sa.Column('id',sa.Integer(),nullable=False),
+        sa.Column('id',sa.Integer(),primary_key=True,nullable=False),
         sa.Column('user_id',sa.Integer(),sa.ForeignKey(
             'users.id',
             ondelete='CASCADE',
         )),
-        sa.Column('template_id',sa.Integer(),sa.ForeignKey(
-            'templates.id',
-            ondelete='CASCADE',
-        )),
         sa.Column('subject',sa.String(255),nullable=False),
-        sa.Column('html_body',sa.text(),nullable=False),
-        sa.Column('created_at',sa.Datetime(),nullable=False),
-        sa.Column('updated_at',sa.Datetime(),nullable=False),
+        sa.Column('html_body',sa.Text(),nullable=False),
+        sa.Column('created_at',sa.DateTime(),nullable=False),
+        sa.Column('updated_at',sa.DateTime(),nullable=False),
     )
 
 

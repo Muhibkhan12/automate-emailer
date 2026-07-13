@@ -20,16 +20,16 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     op.create_table('uploads',
-        sa.Column('id',sa.Integer(),nullable=False),
-        sa.Column('campaign_id',sa.Integer(),sa.Foreignkey(
+        sa.Column('id',sa.Integer(),primary_key=True,nullable=False),
+        sa.Column('campaign_id',sa.Integer(),sa.ForeignKey(
             'campaigns.id',
             ondelete='CASCADE',
         )),
-        sa.Column('filename',sa.String(),nullable=False),
-        sa.Column('file_path',sa.String(),nullable=False),
+        sa.Column('filename',sa.String(255),nullable=False),
+        sa.Column('file_path',sa.String(255),nullable=False),
         sa.Column('total_rows',sa.Integer(),nullable=False),
         sa.Column('imported_rows',sa.Integer(),nullable=False),
-        sa.Column('created_at',sa.Datetime(),nullable=True)
+        sa.Column('created_at',sa.DateTime(),nullable=True)
     )
 
 

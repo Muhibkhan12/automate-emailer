@@ -20,12 +20,12 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     op.create_table('email_logs',
-        sa.Column('id',sa.Integer(),nullable=False),
-        sa.Column('campaign_recipitent_id',sa.Integer(),sa.ForeignKey(
-            'campaign_recipients.id',
+        sa.Column('id',sa.Integer(),primary_key=True,nullable=False),
+        sa.Column('campaigns_recipitents_id',sa.Integer(),sa.ForeignKey(
+            'campaigns_recipitents.id',
             ondelete='CASCADE',
         )),
-        sa.Column('sender_account_id',sa.Integer(),sa.ForeignKey(
+        sa.Column('sender_accounts_id',sa.Integer(),sa.ForeignKey(
             'sender_accounts.id',
             ondelete='CASCADE'
         )),
@@ -36,4 +36,4 @@ def upgrade() -> None:
     )
 
 def downgrade() -> None:
-    op.create_table('email_logs')
+    op.drop_table('email_logs'),

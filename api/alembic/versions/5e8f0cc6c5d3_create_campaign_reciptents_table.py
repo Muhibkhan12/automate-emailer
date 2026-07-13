@@ -13,20 +13,20 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision: str = '5e8f0cc6c5d3'
-down_revision: Union[str, Sequence[str], None] = 'cb15a195f3a6'
+down_revision: Union[str, Sequence[str], None] = 'f80696be8edb'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
     op.create_table('campaigns_recipitents',
-        sa.Column('id',sa.Integer(),nullable=False),
+        sa.Column('id',sa.Integer(),primary_key=True,nullable=False),
         sa.Column('campaign_id',sa.Integer(), sa.ForeignKey(
             'campaigns.id',
             ondelete='CASCADE',
         )),
         sa.Column('sender_account_id',sa.Integer(), sa.ForeignKey(
-            'sender_account.id',
+            'sender_accounts.id',
             ondelete='CASCADE',
         )),
         sa.Column('recipitent_name',sa.String(255),nullable=True),
@@ -35,12 +35,12 @@ def upgrade() -> None:
         sa.Column('phone',sa.String(100),nullable=False),
         sa.Column('status',sa.Enum('pending','sending','sent','Failed')),
         sa.Column('retry_count',sa.Integer()),
-        sa.Column('error_message',sa.text()),
-        sa.Column('created_at',sa.Datetime(),nullable=True),
-        sa.Column('updated_at',sa.Datetime(),nullable=True)
+        sa.Column('error_message',sa.Text()),
+        sa.Column('created_at',sa.DateTime(),nullable=True),
+        sa.Column('updated_at',sa.DateTime(),nullable=True)
     
     )
 
 
 def downgrade() -> None:
-    op.drop_table('campaings_recipitent')
+    op.drop_table('campaigns_recipitents')
