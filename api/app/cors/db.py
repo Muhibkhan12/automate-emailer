@@ -1,14 +1,31 @@
-import sqlalchemy
-import json
+from sqlalchemy import create_engine
+from sqlalchemy.orm import DeclaretiveBase, sessionmaker
+from cors.config import settings
 
-engine = sqlalchemy.create_engine("mysql+pymysql://root:your_password@localhost/email_automation")
+DATABASE_URL = (f"mysql+pymysql://{settings.DB_USER}:"
+                f"{settings.DB_PASSWORD}@"
+                f"{settings.DB_HOST}:"
+                f"{settings.DB_PORT}/"
+                f"{settings.DB_NAME}"
+                )
 
+engine = create_engine(
+    DATABASE_URL,
+    echo = True
+)
 
-try:
-    conn = engine.connect()
-    print({"message":"Sql Connected successfully"})
-    conn.close()
-except Exception as e:
-    print({
-        "error": str(e)
-    })
+SessionLocal = sessionmaker(
+    bind = engine,
+    autoflush=  False,
+    autocommit = False,
+)
+
+class Base(DeclaretiveBase):
+    pass
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
