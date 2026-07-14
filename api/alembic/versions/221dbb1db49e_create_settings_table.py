@@ -24,7 +24,7 @@ def upgrade() -> None:
         sa.Column('id',sa.Integer(),primary_key=True,nullable=False),
         sa.Column('company_name',sa.String(255),nullable=False),
         sa.Column('timezone',sa.DateTime(),nullable=False),
-        sa.Column('default_sender_account',sa.Integer(),sa.ForeignKey(
+        sa.Column('default_sender_account_id',sa.Integer(),sa.ForeignKey(
             'sender_accounts.id',
             ondelete='CASCADE',
         )),
