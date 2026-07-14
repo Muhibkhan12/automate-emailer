@@ -6,3 +6,8 @@ class RegisterSchema(BaseModel):
     password : str
     email_verification : bool
     verification_token : str
+
+
+class LoginSchema(BaseModel):
+    email : EmailStr
+    password : str
