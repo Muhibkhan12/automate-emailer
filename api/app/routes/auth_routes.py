@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from schema.auth import RegisterSchema, loginSchema
-from cors.db import get_db
-from services.user import RegisterUser, loginUser
+from app.schema.auth import RegisterSchema, LoginSchema
+from app.cors.db import get_db
+from app.services.user import RegisterUser, loginUser
 
 router = APIRouter(
     prefix="/auth",
@@ -15,5 +15,11 @@ def register(user : RegisterSchema , db : Session = Depends(get_db)):
 
 
 @router.post("/login")
-def login(user : loginSchema, db : Session = Depends(get_db)):
+def login(user : LoginSchema, db : Session = Depends(get_db)):
     return loginUser(db, user)
+
+@router.post("/logout")
+def logout():
+    return {
+        "message" : "logged out successfully"
+    }

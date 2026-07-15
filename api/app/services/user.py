@@ -1,9 +1,9 @@
 from fastapi import HTTPException,status
-from models.user import User
-from services.auth import create_token
-from services.security import hash_password, verify_password
+from app.models.user import User
+from app.services.auth import create_token
+from app.services.security import hash_password, verify_password
 
-def RegisterUser(db, user ):
+def RegisterUser(db, user):
 
     hashed_password = hash_password(user.password)
 
@@ -45,3 +45,6 @@ def loginUser(db, user):
         "access_token" : token,
         "token_type" : "bearer"
     }
+
+def logout():
+    pass

@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclaretiveBase, sessionmaker
-from cors.config import settings
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from app.cors.config import settings
 
 DATABASE_URL = (f"mysql+pymysql://{settings.DB_USER}:"
                 f"{settings.DB_PASSWORD}@"
@@ -20,7 +20,7 @@ SessionLocal = sessionmaker(
     autocommit = False,
 )
 
-class Base(DeclaretiveBase):
+class Base(DeclarativeBase):
     pass
 
 def get_db():

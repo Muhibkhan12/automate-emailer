@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     DB_PASSWORD : str
 
     SECRET_KEY : str
-    ALGORITHAM : str
+    ALGORITHM : str
     ACCESS_TOKEN_EXPIRY : int
 
     model_config = SettingsConfigDict(
