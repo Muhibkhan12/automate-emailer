@@ -1,13 +1,13 @@
 from sqlalchemy import Integer,String,DateTime,Boolean,ForeignKey,Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import UTC,datetime
-from cors.db import Base
+from app.cors.db import Base
 
 class CampaignsRecipients(Base):
-    __tablename__ = "campaign_recipients"
+    __tablename__ = "campaigns_recipitents"
     id : Mapped[int] = mapped_column(primary_key=True)
     campaign_id : Mapped[int] = mapped_column(ForeignKey("campaigns.id"),nullable=False)
-    sender_account_id : Mapped[int] = mapped_column(ForeignKey("sender_account.id"),nullable=False)
+    sender_account_id : Mapped[int] = mapped_column(ForeignKey("sender_accounts.id"),nullable=False)
     Recipient_name : Mapped[str] = mapped_column(String(255),nullable=False)
     Recipient_email : Mapped[str] = mapped_column(String(255),unique=True)
     company : Mapped[str] = mapped_column(String(400),nullable=False)

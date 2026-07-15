@@ -1,17 +1,17 @@
 from sqlalchemy import String,DateTime,ForeignKey
 from sqlalchemy.orm import  Mapped, mapped_column, relationship
 from datetime import datetime,UTC
-from cors.db import Base
+from app.cors.db import Base
 
 class EmailLogs(Base):
     __tablename__ = "email_logs"
     id: Mapped[int] = mapped_column(primary_key=True,)
-    campaign_recipients_id: Mapped[int] = mapped_column(
-    ForeignKey("campaign_recipients.id"),
+    campaigns_recipitents_id : Mapped[int] = mapped_column(
+    ForeignKey("campaigns_recipitents_id"),
     nullable=False
 )
-    sender_account_id: Mapped[int] = mapped_column(
-    ForeignKey("sender_accounts.id"),
+    sender_account_id : Mapped[int] = mapped_column(
+    ForeignKey("sender_account_id"),
     nullable=False
 )
     action : Mapped[str] = mapped_column(String(200),nullable=False)

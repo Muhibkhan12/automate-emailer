@@ -6,8 +6,7 @@ from app.cors.db import Base
 class User(Base):
     __tablename__ = "users"
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
-    first_name: Mapped[str] = mapped_column(String(100))
-    last_name: Mapped[str] = mapped_column(String(100))
+    name: Mapped[str] = mapped_column(String(255))
     email: Mapped[str] = mapped_column(String(255),unique=True,index=True)
     hashed_password: Mapped[str] = mapped_column(String(255))
     email_verification : Mapped[bool] = mapped_column(Boolean, nullable=False, default = False, server_default = text("0"))

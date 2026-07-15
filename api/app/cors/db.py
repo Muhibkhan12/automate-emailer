@@ -11,7 +11,6 @@ DATABASE_URL = (f"mysql+pymysql://{settings.DB_USER}:"
 
 engine = create_engine(
     DATABASE_URL,
-    echo = True
 )
 
 SessionLocal = sessionmaker(
