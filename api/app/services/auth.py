@@ -14,7 +14,7 @@ def create_token(data : dict):
     encoded_jwt = jwt.encode(
         payload,
         settings.SECRET_KEY,
-        settings.ALGORITHAM
+        settings.ALGORITHM
     )
     return encoded_jwt
     

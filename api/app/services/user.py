@@ -13,37 +13,44 @@ def RegisterUser(db, user):
         password = hashed_password,
     )
     
-    db.add(User)
+    db.add(new_user)
     db.commit()
     db.refresh(new_user)
 
     return new_user
 
 
-def loginUser(db, user):
-    user = db.query(User).filter(User.email == user.email).first()
-    if  not User:
-        raise HTTPException(
-            status_code = status.HTTP_404_NOT_FOUND,
-            detail = "Invalid Email or Password"
-        )
-    
-    if not verify_password(user.password, User.password):
+def loginUser(db, credentials):
+
+    db_user = db.query(User).filter(
+        User.email == credentials.email
+    ).first()
+
+    if db_user is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=" Invalid Password or email"
+            detail="Invalid email or password"
         )
-    
+
+    if not verify_password(
+        credentials.password,
+        db_user.password
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid email or password"
+        )
+
     token = create_token(
         {
-        "sub" : str(user.id),
-        "email" :  user.email 
+            "sub": str(db_user.id),
+            "email": db_user.email
         }
     )
 
-    return{
-        "access_token" : token,
-        "token_type" : "bearer"
+    return {
+        "access_token": token,
+        "token_type": "bearer"
     }
 
 def logout():
