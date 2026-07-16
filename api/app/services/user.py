@@ -4,7 +4,6 @@ from app.services.auth import create_token
 from app.services.security import hash_password, verify_password
 
 def RegisterUser(db, user):
-
     hashed_password = hash_password(user.password)
 
     new_user = User(
